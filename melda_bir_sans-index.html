@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bir Şans 💗</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+ font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ background:#120814;overflow:hidden;color:#fff
+}
+body:before,body:after{
+ content:"";position:fixed;border-radius:50%;filter:blur(70px);opacity:.55
+}
+body:before{width:260px;height:260px;background:#ff397d;top:-80px;left:-80px}
+body:after{width:300px;height:300px;background:#8d3cff;right:-120px;bottom:-100px}
+.bg{position:fixed;inset:0;background:radial-gradient(circle at 50% 20%,#5b1839 0,#210c1d 38%,#10070f 100%);z-index:-2}
+.stars{position:fixed;inset:0;z-index:-1;opacity:.55}
+.star{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;animation:twinkle 2s infinite}
+.card{
+ width:min(92%,430px);padding:34px 26px 28px;text-align:center;
+ background:rgba(255,255,255,.095);border:1px solid rgba(255,255,255,.17);
+ box-shadow:0 25px 80px rgba(0,0,0,.45),inset 0 1px rgba(255,255,255,.12);
+ backdrop-filter:blur(22px);border-radius:32px;
+ animation:enter .8s ease
+}
+.badge{display:inline-block;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.09);font-size:12px;letter-spacing:.8px;color:#ffc7d9}
+.heart{
+ width:92px;height:92px;margin:18px auto 20px;display:grid;place-items:center;
+ border-radius:50%;font-size:45px;
+ background:linear-gradient(145deg,rgba(255,100,155,.3),rgba(255,255,255,.06));
+ box-shadow:0 0 45px rgba(255,58,126,.3);animation:pulse 1.8s infinite
+}
+h1{font-size:29px;line-height:1.15;margin:0 0 14px}
+p{font-size:16px;line-height:1.65;color:#f3e9ee;margin:9px 0}
+.message{margin:20px 0;padding:17px;border-radius:20px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.08)}
+.message b{color:#fff}
+button{
+ width:100%;padding:15px;border:0;border-radius:17px;margin-top:10px;
+ font-size:16px;font-weight:750;cursor:pointer;transition:.2s
+}
+button:active{transform:scale(.97)}
+.yes{color:#5b1230;background:linear-gradient(135deg,#fff,#ffd9e6);box-shadow:0 8px 25px rgba(255,93,145,.22)}
+.no{color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
+.note{font-size:12px!important;color:#bcaab2!important;margin-top:17px!important}
+#result{display:none}
+.confetti{position:fixed;top:-20px;font-size:20px;animation:fall 3s linear forwards;pointer-events:none}
+@keyframes enter{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes pulse{50%{transform:scale(1.08);box-shadow:0 0 70px rgba(255,58,126,.5)}}
+@keyframes twinkle{50%{opacity:.2;transform:scale(.6)}}
+@keyframes fall{to{transform:translateY(110vh) rotate(500deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="stars" id="stars"></div>
+
+<div class="card">
+ <section id="main">
+  <div class="badge">SADECE SANA 💌</div>
+  <div class="heart">❤️</div>
+  <h1>Melda, sana bir şey söylemek istiyorum 💌</h1>
+  <div class="message">
+   <p>Bazen bazı şeyleri kelimelerle anlatmak zor oluyor.</p>
+   <p>Ben yine de denemek istiyorum.</p>
+   <p><b>Seni daha yakından tanımak ve aramızdaki şeye bir şans vermek istiyorum.</b></p>
+  </div>
+  <p>Melda, benimle bir şans vermeyi düşünür müsün?</p>
+
+  <button class="yes" onclick="accept()">Evet, bir şans verelim 💗</button>
+  <button class="no" onclick="think()">Biraz daha düşünmek istiyorum</button>
+
+  <p class="note">Cevabın ne olursa olsun kararına saygı duyacağım.</p>
+ </section>
+
+ <section id="result">
+  <div class="heart">💖</div>
+  <h1>Belki güzel bir başlangıçtır...</h1>
+  <div class="message">
+   <p>Teşekkür ederim.</p>
+   <p><b>Acele etmeden, birbirimizi daha iyi tanıyalım.</b></p>
+   <p>Bu kez güzel anılar biriktirmek için gerçekten uğraşacağım. ✨</p>
+  </div>
+  <p>İlk adımı attım. Gerisi birlikte olsun. 🤍</p>
+ </section>
+</div>
+
+<script>
+const stars=document.getElementById("stars");
+for(let i=0;i<55;i++){
+ const s=document.createElement("span");s.className="star";
+ s.style.left=Math.random()*100+"vw";s.style.top=Math.random()*100+"vh";
+ s.style.animationDelay=(Math.random()*2)+"s";stars.appendChild(s);
+}
+function accept(){
+ document.getElementById("main").style.display="none";
+ document.getElementById("result").style.display="block";
+ for(let i=0;i<35;i++){
+  const c=document.createElement("div");c.className="confetti";
+  c.textContent=["💗","✨","💕","♡"][Math.floor(Math.random()*4)];
+  c.style.left=Math.random()*100+"vw";
+  c.style.animationDelay=Math.random()*1.2+"s";
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),4000);
+ }
+}
+function think(){
+ alert("Tabii. Acele etmeni istemiyorum. Ne karar verirsen ver, buna saygı duyacağım. 🤍");
+}
+</script>
+</body>
+</html>
